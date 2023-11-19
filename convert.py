@@ -1,15 +1,36 @@
 from data.letters import *
 
 
+def check_special_cases(word: str, letters: dict) -> str:
+    if 'ев' in letters.keys():
+        word = word.replace('ев', letters['ев'])
+
+    if 'Во' in letters.keys():
+        if word.upper().startswith('ВО'):
+            word = letters[word[:2]] + word[2:]
+
+    if 'О+' in letters.keys():
+        if word.upper().startswith('О'):
+            word = letters[word[0]+'+'] + word[1:]
+
+    return word
+
+
 def ru_to_arm(line: str, letters=FIRST_SET) -> str:
-    out_list = []
-    for c in line:
-        if c in letters:
-            out_list.append(letters[c])
-        else:
-            out_list.append(c)
-    # print(out_list)
-    s = ''.join(out_list)
+    out_words = []
+    words = line.split(' ')
+
+    for word in words:
+        word = check_special_cases(word, letters)
+
+        out_list = []
+        for c in word:
+            if c in letters:
+                out_list.append(letters[c])
+            else:
+                out_list.append(c)
+        out_words.append(''.join(out_list))
+    s = ' '.join(out_words)
     return s
 
 
@@ -33,6 +54,6 @@ if __name__ == '__main__':
     # print(ru_to_arm(s))
     # rus_to_arm('onegin.txt')
     # print(FIRST_SET)
-    convert_file('leskov_vody.txt', LESSON_2)
+    convert_file('leskov_drovokol.txt',  LESSON_4)
 
 
