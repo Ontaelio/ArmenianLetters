@@ -33,6 +33,6 @@ if __name__ == '__main__':
     # print(ru_to_arm(s))
     # rus_to_arm('onegin.txt')
     # print(FIRST_SET)
-    convert_file('leskov-rasskazy.txt', BGDP)
+    convert_file('leskov_vody.txt', LESSON_2)
 
 
