@@ -13,10 +13,41 @@ def check_special_cases(word: str, letters: dict) -> str:
         if word.upper().startswith('О'):
             word = letters[word[0]+'+'] + word[1:]
 
+    if 'дз' in letters.keys():
+        word = word.replace('дз', letters['дз'])
+        word = word.replace('ДЗ', letters['ДЗ'])
+        word = word.replace('Дз', letters['Дз'])
+
+    if 'ть' in letters.keys():
+        word = word.replace('ть', letters['ть'])
+        word = word.replace('ти', letters['ть'] + 'и')
+        word = word.replace('те', letters['ть'] + 'е')
+        word = word.replace('тё', letters['ть'] + 'ё')
+        word = word.replace('тя', letters['ть'] + 'я')
+        word = word.replace('тю', letters['ть'] + 'ю')
+        word = word.replace('Ть', letters['ТЬ'])
+        word = word.replace('Ти', letters['ТЬ'] + 'и')
+        word = word.replace('Те', letters['ТЬ'] + 'е')
+        word = word.replace('Тё', letters['ТЬ'] + 'ё')
+        word = word.replace('Тя', letters['ТЬ'] + 'я')
+        word = word.replace('Тю', letters['ТЬ'] + 'ю')
+        word = word.replace('ТЬ', letters['ТЬ'])
+        word = word.replace('ТИ', letters['ТЬ'] + 'И')
+        word = word.replace('ТЕ', letters['ТЬ'] + 'Е')
+        word = word.replace('ТЁ', letters['ТЬ'] + 'Ё')
+        word = word.replace('ТЯ', letters['ТЬ'] + 'Я')
+        word = word.replace('ТЮ', letters['ТЬ'] + 'Ю')
+
+    if 'дж' in letters.keys():
+        word = word.replace('дж', letters['дж'])
+        word = word.replace('ДЖ', letters['ДЖ'])
+        word = word.replace('Дж', letters['Дж'])
+
+
     return word
 
 
-def ru_to_arm(line: str, letters=FIRST_SET) -> str:
+def ru_to_arm(line: str, letters) -> str:
     out_words = []
     words = line.split(' ')
 
@@ -34,7 +65,7 @@ def ru_to_arm(line: str, letters=FIRST_SET) -> str:
     return s
 
 
-def convert_file(filename, letters=FIRST_SET):
+def convert_file(filename, letters):
     filename = 'texts/' + filename
     with open(filename, 'r', encoding="utf-8") as fin:
         with open(filename.split('.')[0] + '_arm.' + filename.split('.')[1], 'w', encoding="utf-8") as fout:
@@ -54,6 +85,6 @@ if __name__ == '__main__':
     # print(ru_to_arm(s))
     # rus_to_arm('onegin.txt')
     # print(FIRST_SET)
-    convert_file('leskov_drovokol.txt',  LESSON_4)
+    convert_file('leskov_drovokol.txt',  VOWELS | VOWELS_ADD_3 | VOWELS_ADD_1)
 
 
