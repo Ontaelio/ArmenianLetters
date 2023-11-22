@@ -66,6 +66,17 @@ LESSON_4 = {
     'во': '\u0578',  # ո
     'О+': '\u0555',  # 'Օ'
     'о+': '\u0585',  # 'օ'
+    'О': '\u0548',  # Ո
+    'о': '\u0578',  # ո
+}
+
+LESSON_5 = {
+    'Х': '\u0540',
+    'х': '\u0570',
+    'Г': '\u0542',  # 'Ղ'
+    'г': '\u0572',  # 'ղ'
+    'Р': '\u054c',  # Ռ
+    'р': '\u057c',  # ռ
 }
 
 FIRST_SET = {
@@ -249,5 +260,5 @@ ARMENIAN_ALPHABET = {
 }
 
 if __name__ == '__main__':
-    for key, value in LESSON_4.items():
+    for key, value in LESSON_5.items():
         print(f"{key}: {value}")
