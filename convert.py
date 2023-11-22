@@ -43,6 +43,25 @@ def check_special_cases(word: str, letters: dict) -> str:
         word = word.replace('ДЖ', letters['ДЖ'])
         word = word.replace('Дж', letters['Дж'])
 
+    if 'рь' in letters.keys():
+        word = word.replace('рь', letters['рь'])
+        word = word.replace('ри', letters['рь'] + 'и')
+        word = word.replace('ре', letters['рь'] + 'е')
+        word = word.replace('рё', letters['рь'] + 'ё')
+        word = word.replace('ря', letters['рь'] + 'я')
+        word = word.replace('рю', letters['рь'] + 'ю')
+        word = word.replace('Рь', letters['РЬ'])
+        word = word.replace('Ри', letters['РЬ'] + 'и')
+        word = word.replace('Ре', letters['РЬ'] + 'е')
+        word = word.replace('Рё', letters['РЬ'] + 'ё')
+        word = word.replace('Ря', letters['РЬ'] + 'я')
+        word = word.replace('Рю', letters['РЬ'] + 'ю')
+        word = word.replace('РЬ', letters['РЬ'])
+        word = word.replace('РИ', letters['РЬ'] + 'И')
+        word = word.replace('РЕ', letters['РЬ'] + 'Е')
+        word = word.replace('РЁ', letters['РЬ'] + 'Ё')
+        word = word.replace('РЯ', letters['РЬ'] + 'Я')
+        word = word.replace('РЮ', letters['РЬ'] + 'Ю')
 
     return word
 
@@ -85,6 +104,6 @@ if __name__ == '__main__':
     # print(ru_to_arm(s))
     # rus_to_arm('onegin.txt')
     # print(FIRST_SET)
-    convert_file('leskov_drovokol.txt',  VOWELS | VOWELS_ADD_3 | VOWELS_ADD_1)
+    convert_file('leskov_drovokol.txt',  CONSONANTS_BOTH_RS)
 
 
