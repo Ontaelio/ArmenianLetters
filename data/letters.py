@@ -328,6 +328,13 @@ ARMENIAN_ALPHABET = {
     'ֆ': '\u0586',
 }
 
+
+SETS = {
+    'lesson_1': LESSON_1,
+    'lesson_2': LESSON_2,
+    'lesson_3': LESSON_3,
+}
+
 if __name__ == '__main__':
     for key, value in LESSON_11.items():
         print(f"{key}: {value}")

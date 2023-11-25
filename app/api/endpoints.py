@@ -1,6 +1,8 @@
 from fastapi import FastAPI, Form, APIRouter, HTTPException
 from fastapi.responses import JSONResponse
 from typing import List
+from data.letters import *
+from convert import ru_to_arm
 
 app = FastAPI()
 router = APIRouter()
@@ -21,13 +23,19 @@ async def process_text(data: dict):
     lesson_options = data.get("options")
 
     # Проверяем, что lesson_options содержит только допустимые значения
-    valid_options = ["Урок 1", "Урок 2", "Урок 3"]  # Добавьте все допустимые значения
+    valid_options = SETS.keys()  # Добавьте все допустимые значения
     invalid_options = set(lesson_options) - set(valid_options)
     if invalid_options:
         raise HTTPException(status_code=422, detail=f"Invalid 'options' values: {', '.join(invalid_options)}")
 
     if text is None:
         raise HTTPException(status_code=422, detail="Missing 'text' field")
-    processed_text = text[::-1]
+
+    sets = {}
+    for a in lesson_options:
+        sets |= SETS[a]
+
+
+    processed_text = ru_to_arm(text, sets)
     return {"result": processed_text}
 
