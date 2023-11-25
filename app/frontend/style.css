@@ -1,17 +1,62 @@
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
-    margin: 0;
-    padding: 0;
+    /*text-align: center;*/
+    /*margin: 0;*/
+    /*padding: 0;*/
 }
 
 .container {
     padding: 20px;
 }
 
+form {
+    max-width: 90%; /* Увеличим ширину формы */
+    margin: auto;
+}
+
 label {
     display: block;
     margin-top: 10px;
+}
+
+textarea {
+    display: block;
+    width: 100%; /* Растягиваем текстовое поле на всю доступную ширину */
+    box-sizing: border-box; /* Учтем отступы и границы внутри ширины */
+    margin-top: 10px;
+}
+
+/* Стили для блока с опциями */
+.options-container {
+    display: flex;
+    flex-wrap: wrap; /* Обернем элементы на новую строку, если не помещаются */
+    /*align-items: flex-start;*/
+    /*justify-content: flex-start;*/
+    margin-top: 60px;
+    text-align: left;
+}
+
+.column {
+    flex: 1;
+    margin-right: 20px; /* Добавим отступ между колонками */
+}
+
+/* Убираем отступы у чекбоксов */
+.column label {
+    margin: 0;
+}
+
+/* Выравниваем чекбоксы по левому краю */
+.column input {
+    margin-right: 5px;
+}
+
+@media screen and (max-width: 600px) {
+    /* Изменяем стили для экранов шириной до 600px */
+    .column {
+        flex: 1 0 100%; /* Каждая колонка занимает 100% ширины при ширине экрана меньше 600px */
+        margin-right: 0; /* Убираем отступ между колонками */
+    }
 }
 
 button {
@@ -20,8 +65,11 @@ button {
     cursor: pointer;
 }
 
-#response {
+#result {
     margin-top: 20px;
     font-size: 18px;
-    font-weight: bold;
+    font-weight: normal;
+    text-align: left;
+    margin-left: 30px;
+    margin-right: 30px;
 }

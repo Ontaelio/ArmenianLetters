@@ -55,7 +55,7 @@ LESSON_2 = {
 LESSON_3 = {
     'Э': '\u0537',  # 'Է'
     'э': '\u0567',  # 'է'
-    'E': '\u0535',  # 'Ե'
+    'Е': '\u0535',  # 'Ե'
     'е': '\u0565',  # 'ե'
 }
 
@@ -333,8 +333,32 @@ SETS = {
     'lesson_1': LESSON_1,
     'lesson_2': LESSON_2,
     'lesson_3': LESSON_3,
+    'lesson_4': LESSON_4,
+    'lesson_5': LESSON_5,
+    'lesson_6': LESSON_6,
+    'lesson_7': LESSON_7,
+    'lesson_8': LESSON_8,
+    'lesson_9': LESSON_9,
+    'lesson_10': LESSON_10,
+    'lesson_11': LESSON_11,
+    'vowels': VOWELS,
+    'vowels_j': VOWELS_ADD_J,
+    'vowels_vojev': VOWELS_ADD_VOEV,
+    'vowels_bI': VOWELS_ADD_,
+    'consonants_altr': CONSONANTS_ALTR,
+    'consonants_altg': CONSONANTS_ALTG,
+    'consonants_alth': CONSONANTS_ALTH,
+    'consonants_altpkt': CONSONANTS_ALTPKT,
+    'consonants_softt': CONSONANTS_SOFTT,
+    'consonants_dzs': CONSONANTS_DZS,
+    'consonants_tsch': CONSONANTS_TSCH,
+    'consonants_both_rs': CONSONANTS_BOTH_RS,
 }
 
 if __name__ == '__main__':
-    for key, value in LESSON_11.items():
-        print(f"{key}: {value}")
+    a = []
+    for key, value in CONSONANTS.items():
+        a.append(value)
+        # print(f"{value}")
+
+    print(''.join(a))

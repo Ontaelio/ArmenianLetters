@@ -10,18 +10,106 @@
 <body>
 
 <form id="processingForm">
-    <label for="textInput">Enter Text:</label>
-    <textarea id="textInput" name="text" rows="20" cols="150"></textarea>
 
-    <label>
-        <input type="checkbox" name="options" value="lesson_1"> Урок 1
-    </label>
-    <label>
-        <input type="checkbox" name="options" value="lesson_2"> Урок 2
-    </label>
-    <label>
-        <input type="checkbox" name="options" value="lesson_3"> Урок 3
-    </label>
+
+    <div class="options-container">
+        <div class="column">
+
+            <label><b>Самоучитель</b></label>
+
+            <label>
+                <input type="checkbox" name="options" value="lesson_1"> Урок 1 - Աա ՈՒու Բբ Պպ Գգ Կկ Դդ Տտ Րր Լլ Մմ Նն
+            </label>
+            <label>
+                <input type="checkbox" name="options" value="lesson_2"> Урок 2 - Իի Յյ Խխ Շշ Ժժ Չչ Սս Զզ Ցց Ֆֆ Վվ
+            </label>
+            <label>
+                <input type="checkbox" name="options" value="lesson_3"> Урок 3 - Եե Էէ
+            </label>
+            <label>
+                <input type="checkbox" name="options" value="lesson_4"> Урок 4 - և Օօ Ոո
+            </label>
+            <label>
+                <input type="checkbox" name="options" value="lesson_5"> Урок 5 - Հհ Ղղ Ռռ
+            </label>
+            <label>
+                <input type="checkbox" name="options" value="lesson_6"> Урок 6 - Ըը
+            </label>
+
+<!--            </div>-->
+<!--        <div class="column">-->
+
+            <label>
+                <input type="checkbox" name="options" value="lesson_7"> Урок 7 - Փփ
+            </label>
+            <label>
+                <input type="checkbox" name="options" value="lesson_8"> Урок 8 - Քք
+            </label>
+            <label>
+                <input type="checkbox" name="options" value="lesson_9"> Урок 9 - Թթ
+            </label>
+            <label>
+                <input type="checkbox" name="options" value="lesson_10"> Урок 10 - Ձձ Ծծ
+            </label>
+            <label>
+                <input type="checkbox" name="options" value="lesson_11"> Урок 11 - Ջջ Ճճ
+            </label>
+
+
+        </div>
+        <div class="column">
+            <label><b>Наборы букв</b></label>
+            <label>
+                <input type="checkbox" name="options" value="vowels"> Гласные - Աա ՈՒու Իի Էէ Եե Օօ Ոո
+            </label>
+            <label>
+                <input type="checkbox" name="options" value="vowels_j"> Я, Ё, Ю с Յ
+            </label>
+            <label>
+                <input type="checkbox" name="options" value="vowels_vojev"> Ո как "во" в начале слова, և
+            </label>
+            <label>
+                <input type="checkbox" name="options" value="vowels_bI"> Ы -> Ըը
+            </label>
+
+            <br>
+
+            <label>
+                <input type="checkbox" name="options" value="consonants"> Согласные - Բբ Պպ Գգ Կկ Դդ Տտ Րր Լլ Մմ Նն Յյ Խխ Շշ Ժժ Չչ Սս Զզ Ցց Ֆֆ Վվ
+            </label>
+            <label>
+                <input type="checkbox" name="options" value="consonants_altr"> Ռռ вместо Րր (ближе к русской Р)
+            </label>
+            <label>
+                <input type="checkbox" name="options" value="consonants_altg"> Ղղ вместо Գգ (южный говор!)
+            </label>
+            <label>
+                <input type="checkbox" name="options" value="consonants_alth"> Х как Հհ вместо Խխ
+            </label>
+            <label>
+                <input type="checkbox" name="options" value="consonants_altpkt"> П, К, Т с придыханием (Փփ Քք Թթ)
+            </label>
+            <label>
+                <input type="checkbox" name="options" value="consonants_softt"> Ծծ для мягкой Т
+            </label>
+            <label>
+                <input type="checkbox" name="options" value="consonants_dzs"> Ձձ Ջջ (для дж хороши тексты про Джорджа и Джин)
+            </label>
+            <label>
+                <input type="checkbox" name="options" value="consonants_tsch"> Щ -> Ճ (на самом деле звучит как ТС!)
+            </label>
+            <label>
+                <input type="checkbox" name="options" value="consonants_both_rs"> Использовать Րր и Ռռ, Րր для мягкой Р
+            </label>
+
+
+
+
+        </div>
+    </div>
+
+    <label for="textInput">Текст:</label>
+    <textarea id="textInput" name="text" rows="20" cols="150"></textarea>
 
     <button type="button" onclick="processText()">Process Text</button>
 
