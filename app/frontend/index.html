@@ -4,9 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Text Processing Form</title>
+    <title>Конвертор текстов Арм</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
+
+<header>
+                    <h1>Աрмянскիй конвертор текстов</h1>
+                </header>
+
+
 <body>
 
 <form id="processingForm">
@@ -81,6 +88,9 @@
                 <input type="checkbox" name="options" value="consonants_altr"> Ռռ вместо Րր (ближе к русской Р)
             </label>
             <label>
+                <input type="checkbox" name="options" value="consonants_both_rs"> Использовать Րր и Ռռ, Րր для мягкой Р
+            </label>
+            <label>
                 <input type="checkbox" name="options" value="consonants_altg"> Ղղ вместо Գգ (южный говор!)
             </label>
             <label>
@@ -96,14 +106,8 @@
                 <input type="checkbox" name="options" value="consonants_dzs"> Ձձ Ջջ (для дж хороши тексты про Джорджа и Джин)
             </label>
             <label>
-                <input type="checkbox" name="options" value="consonants_tsch"> Щ -> Ճ (на самом деле звучит как ТС!)
+                <input type="checkbox" name="options" value="consonants_tsch"> Щ -> Ճ (на самом деле звучит как ТШ!)
             </label>
-            <label>
-                <input type="checkbox" name="options" value="consonants_both_rs"> Использовать Րր и Ռռ, Րր для мягкой Р
-            </label>
-
-
-
 
         </div>
     </div>
@@ -111,7 +115,7 @@
     <label for="textInput">Текст:</label>
     <textarea id="textInput" name="text" rows="20" cols="150"></textarea>
 
-    <button type="button" onclick="processText()">Process Text</button>
+    <button type="button" onclick="processText()">Конвертировать</button>
 
     <div id="result"></div>
 

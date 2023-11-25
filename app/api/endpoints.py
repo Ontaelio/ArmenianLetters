@@ -1,6 +1,4 @@
-from fastapi import FastAPI, Form, APIRouter, HTTPException
-from fastapi.responses import JSONResponse
-from typing import List
+from fastapi import FastAPI, APIRouter, HTTPException
 from data.letters import *
 from convert import ru_to_arm
 
@@ -34,7 +32,6 @@ async def process_text(data: dict):
     sets = {}
     for a in lesson_options:
         sets |= SETS[a]
-
 
     processed_text = ru_to_arm(text, sets)
     return {"result": processed_text}

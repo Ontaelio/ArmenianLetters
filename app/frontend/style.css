@@ -1,3 +1,10 @@
+header {
+                        background-color: #333;
+                        color: white;
+                        padding: 10px;
+                        text-align: center;
+                    }
+
 body {
     font-family: Arial, sans-serif;
     /*text-align: center;*/
@@ -32,7 +39,7 @@ textarea {
     flex-wrap: wrap; /* Обернем элементы на новую строку, если не помещаются */
     /*align-items: flex-start;*/
     /*justify-content: flex-start;*/
-    margin-top: 60px;
+    margin-top: 30px;
     text-align: left;
 }
 
