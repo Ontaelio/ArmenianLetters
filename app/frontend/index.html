@@ -1,16 +1,34 @@
-<!-- frontend/index.html -->
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/style.css">
-    <title>FastAPI Frontend</title>
+    <title>Text Processing Form</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Hello FastAPI Frontend!</h1>
-    <button id="getDataButton">Get Data from API</button>
-    <div id="dataContainer"></div>
-    <script src="/static/script.js"></script>
+
+<form id="processingForm">
+    <label for="textInput">Enter Text:</label>
+    <textarea id="textInput" name="text" rows="4" cols="50"></textarea>
+
+    <label>
+        <input type="checkbox" name="options" value="Урок 1"> Option 1
+    </label>
+    <label>
+        <input type="checkbox" name="options" value="Урок 2"> Option 2
+    </label>
+    <label>
+        <input type="checkbox" name="options" value="Урок 3"> Option 3
+    </label>
+
+    <button type="button" onclick="processText()">Process Text</button>
+
+    <div id="result"></div>
+
+    <script src="script.js"></script>
+</form>
+
 </body>
 </html>

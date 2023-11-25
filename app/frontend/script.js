@@ -1,16 +1,19 @@
-// frontend/script.js
-document.getElementById('getDataButton').addEventListener('click', getData);
+// main.js
+async function processText() {
+    const text = document.getElementById("textInput").value;
+    const options = Array.from(document.querySelectorAll('input[name="options"]:checked'))
+        .map(checkbox => checkbox.value);
 
-async function getData() {
-    try {
-        const response = await fetch('http://localhost:8000/api/v1/some_endpoint');
-        if (!response.ok) {
-            throw new Error('Failed to fetch data from API');
-        }
-        const data = await response.json();
-        document.getElementById('dataContainer').textContent = JSON.stringify(data, null, 2);
-    } catch (error) {
-        console.error(error);
-        document.getElementById('dataContainer').textContent = 'Error fetching data from API';
-    }
+    const data = { text, options };
+
+    const response = await fetch('http://localhost:8000/api/process_text', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    });
+
+    const result = await response.json();
+    document.getElementById("result").innerText = `Result: ${result.result}`;
 }
