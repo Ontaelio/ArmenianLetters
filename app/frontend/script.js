@@ -8,8 +8,27 @@ document.addEventListener('DOMContentLoaded', function () {
     // Обновление текста с именем файла при изменении файла
     fileInput.addEventListener('change', function () {
         const file = fileInput.files[0];
-        fileTextElement.innerText = file ? `Selected File: ${file.name}` : '';
-        document.getElementById('optionsForm').submit();
+
+        // Получение типа файла
+        const fileType = file.type;
+
+        // Получение размера файла в КБ
+        const fileSizeKB = file.size / 1024;
+
+        // Проверка типа файла (исключительно текстовый файл)
+        if (!fileType.startsWith('text/')) {
+            alert('Некорректный тип файла. Пожалуйста, выберите текстовый файл.');
+            return;
+        }
+
+        // Проверка размера файла (не больше 500 КБ)
+        if (fileSizeKB > 800) {
+            alert('Размер файла превышает 800 КБ. Пожалуйста, выберите файл размером до 500 КБ.');
+            return;
+        }
+
+        fileTextElement.innerText = file ? `Выбран файл: ${file.name}` : '';
+        // document.getElementById('optionsForm').submit();
     });
 });
 

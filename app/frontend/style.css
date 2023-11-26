@@ -67,9 +67,21 @@ textarea {
 }
 
 button {
-    margin-top: 10px;
-    padding: 10px;
+    /*margin-top: 10px;*/
+    /*padding: 5px 10px;*/
+    /*cursor: pointer;*/
+    background-color: #333; /* Цвет фона кнопки */
+    color: white; /* Цвет текста кнопки */
+    padding: 5px 10px; /* Поля кнопки */
     cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    /*width: 70px;*/
+    margin-top: 10px; /* Добавим немного отступа сверху */
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+
 }
 
 #result {
@@ -110,7 +122,7 @@ label.custom-file-upload::after {
 .custom-file-upload-text {
     margin-top: 10px; /* Добавим отступа между текстом и кнопкой */
     font-size: 14px;
-    border: 1px solid red; /* Красная рамка для отладки */
+    /*border: 1px solid red; !* Красная рамка для отладки *!*/
     /* Добавленные стили */
     padding: 5px; /* Добавлено для создания внутреннего пространства */
     display: inline-block; /* Добавлено, чтобы элемент занимал только необходимое */
