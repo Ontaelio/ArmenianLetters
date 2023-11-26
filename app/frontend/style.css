@@ -80,3 +80,38 @@ button {
     margin-left: 30px;
     margin-right: 30px;
 }
+
+/* Стили для кнопки загрузки файла */
+input[type="file"] {
+    display: none; /* Скрываем нативную кнопку загрузки файла */
+}
+
+label.custom-file-upload {
+    background-color: #333; /* Цвет фона кнопки */
+    color: white; /* Цвет текста кнопки */
+    padding: 5px 10px; /* Поля кнопки */
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 70px;
+    margin-top: 10px; /* Добавим немного отступа сверху */
+    display: inline-block;
+}
+
+/* Стили для кнопки после выбора файла */
+label.custom-file-upload::after {
+    content: 'Выбрать файл'; /* Подпись кнопки */
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Стили для текста после выбора файла */
+.custom-file-upload-text {
+    margin-top: 10px; /* Добавим отступа между текстом и кнопкой */
+    font-size: 14px;
+    border: 1px solid red; /* Красная рамка для отладки */
+    /* Добавленные стили */
+    padding: 5px; /* Добавлено для создания внутреннего пространства */
+    display: inline-block; /* Добавлено, чтобы элемент занимал только необходимое */
+}

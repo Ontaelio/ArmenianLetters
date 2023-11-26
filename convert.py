@@ -1,16 +1,36 @@
 from data.letters import *
 
 
+def special_left_strip(word: str) -> (str, str):
+    t = ''
+    while word[0] in ["'", '"', '“', '«', '\n', '\r', '\t', '\f']:
+        t = t + word[0]
+        word = word[1:]
+
+    return t, word
+
+
 def check_special_cases(word: str, letters: dict) -> str:
+    if not word:
+        return word
+
     if 'ев' in letters.keys():
         word = word.replace('ев', letters['ев'])
 
     if 'Во' in letters.keys():
-        if word.upper().startswith('ВО'):
+        if word[0] in ["'", '"', '“', '«', '\n', '\r', '\t', '\f']:
+            t, w = special_left_strip(word)
+            if w.upper().startswith('ВО'):
+                word = t + letters[w[:2]] + w[2:]
+        elif word.upper().startswith('ВО'):
             word = letters[word[:2]] + word[2:]
 
     if 'О+' in letters.keys():
-        if word.upper().startswith('О'):
+        if word[0] in ["'", '"', '“', '«', '\n', '\r', '\t', '\f']:
+            t, w = special_left_strip(word)
+            if w.upper().startswith('О'):
+                word = t + letters[w[0] + '+'] + w[1:]
+        elif word.upper().startswith('О'):
             word = letters[word[0]+'+'] + word[1:]
 
     if 'дз' in letters.keys():
@@ -66,22 +86,29 @@ def check_special_cases(word: str, letters: dict) -> str:
     return word
 
 
-def ru_to_arm(line: str, letters) -> str:
-    out_words = []
-    words = line.split(' ')
+def ru_to_arm(text: str, letters) -> str:
+    out_lines = []
+    lines = text.split('\n')  # line feed split, needed for special cases in web interface
 
-    for word in words:
-        word = check_special_cases(word, letters)
+    for line in lines:
+        out_words = []
+        words = line.split(' ')
 
-        out_list = []
-        for c in word:
-            if c in letters:
-                out_list.append(letters[c])
-            else:
-                out_list.append(c)
-        out_words.append(''.join(out_list))
-    s = ' '.join(out_words)
-    return s
+        for word in words:
+            word = check_special_cases(word, letters)
+
+            out_list = []
+            for c in word:
+                if c in letters:
+                    out_list.append(letters[c])
+                else:
+                    out_list.append(c)
+            out_words.append(''.join(out_list))
+
+        s = ' '.join(out_words)
+        out_lines.append(s)
+
+    return "\n".join(out_lines)
 
 
 def convert_file(filename, letters):

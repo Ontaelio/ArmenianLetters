@@ -1,5 +1,44 @@
 // main.js
+
+document.addEventListener('DOMContentLoaded', function () {
+    // В этом блоке кода обрабатывается событие загрузки страницы
+    const fileInput = document.getElementById('fileInput');
+    const fileTextElement = document.getElementById('fileText');
+
+    // Обновление текста с именем файла при изменении файла
+    fileInput.addEventListener('change', function () {
+        const file = fileInput.files[0];
+        fileTextElement.innerText = file ? `Selected File: ${file.name}` : '';
+        document.getElementById('optionsForm').submit();
+    });
+});
+
+
+async function processFile() {
+    // Получение содержимого файла, если выбран
+    const fileInput = document.getElementById('fileInput');
+    const file = fileInput.files[0];
+
+
+    // Обновление текста с именем файла
+    // fileInput.addEventListener('change', function () {
+    //     const file = fileInput.files[0];
+    //     fileTextElement.innerText = file ? `Selected File: ${file.name}` : '';
+    // });
+
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            // Замена текста на содержимое файла
+            document.getElementById('textInput').value = e.target.result;
+        };
+        reader.readAsText(file);
+    }
+}
+
+
 async function processText() {
+
     const text = document.getElementById("textInput").value;
     const options = Array.from(document.querySelectorAll('input[name="options"]:checked'))
         .map(checkbox => checkbox.value);

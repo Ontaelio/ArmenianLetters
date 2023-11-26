@@ -125,7 +125,7 @@ VOWELS = {
     'и': '\u056B',
     'Э': '\u0537',  # 'Է'
     'э': '\u0567',  # 'է'
-    'E': '\u0535',  # 'Ե'
+    'Е': '\u0535',  # 'Ե'
     'е': '\u0565',  # 'ե'
     'О+': '\u0555',  # 'Օ'
     'о+': '\u0585',  # 'օ'
@@ -345,6 +345,7 @@ SETS = {
     'vowels_j': VOWELS_ADD_J,
     'vowels_vojev': VOWELS_ADD_VOEV,
     'vowels_bI': VOWELS_ADD_,
+    'consonants': CONSONANTS,
     'consonants_altr': CONSONANTS_ALTR,
     'consonants_altg': CONSONANTS_ALTG,
     'consonants_alth': CONSONANTS_ALTH,
