@@ -248,6 +248,14 @@ CONSONANTS_BOTH_RS = {
     'рь': '\u0580',
 }
 
+CONSONANTS_VOVEL_PKT = {
+    'ТЪ': '\u054F',
+    'тъ': '\u057F',
+    'Т': '\u0539',  # Թ
+    'т': '\u0569',  # թ
+}
+
+
 ARMENIAN_ALPHABET = {
     'Ա': '\u0531',
     'ա': '\u0561',
@@ -354,6 +362,8 @@ SETS = {
     'consonants_dzs': CONSONANTS_DZS,
     'consonants_tsch': CONSONANTS_TSCH,
     'consonants_both_rs': CONSONANTS_BOTH_RS,
+    'consonants_vowel_pkt': CONSONANTS_VOVEL_PKT,
+
 }
 
 if __name__ == '__main__':
