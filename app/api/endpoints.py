@@ -21,7 +21,7 @@ async def process_text(data: dict):
     lesson_options = data.get("options")
 
     # Проверяем, что lesson_options содержит только допустимые значения
-    valid_options = SETS.keys()  # Добавьте все допустимые значения
+    valid_options = SETS.keys()
     invalid_options = set(lesson_options) - set(valid_options)
     if invalid_options:
         raise HTTPException(status_code=422, detail=f"Invalid 'options' values: {', '.join(invalid_options)}")
@@ -30,8 +30,8 @@ async def process_text(data: dict):
         raise HTTPException(status_code=422, detail="Missing 'text' field")
 
     sets = {}
-    for a in lesson_options:
-        sets |= SETS[a]
+    for _ in lesson_options:
+        sets |= SETS[_]
 
     processed_text = ru_to_arm(text, sets)
     return {"result": processed_text}

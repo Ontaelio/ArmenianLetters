@@ -250,7 +250,7 @@ CONSONANTS_BOTH_RS = {
 
 # Տտ перед гласными, Թթ перед согласными и в конце слова (аналогично с կ и պ)
 # вполне возможно, что надо наоборот!
-CONSONANTS_VOVEL_PKT = {
+CONSONANTS_VOWEL_PKT = {
     'ТЪ': '\u054F',
     'тъ': '\u057F',
     'Т': '\u0539',  # Թ
@@ -265,6 +265,9 @@ CONSONANTS_VOVEL_PKT = {
     'к': '\u0584',  # ք
 }
 
+RU_SOFTENING_LETTERS = ['Ь', 'ь', 'Е', 'е', 'Ё', 'е', 'И', 'и', 'Ю', 'ю', 'Я', 'я']
+RU_VOWELS = ['А', 'а', 'Е', 'е', 'Ё', 'е', 'И', 'и', 'О', 'о',
+             'У', 'у', 'Ы', 'ы', 'Э', 'э', 'Ю', 'ю', 'Я', 'я']
 
 ARMENIAN_ALPHABET = {
     'Ա': '\u0531',
@@ -372,7 +375,7 @@ SETS = {
     'consonants_dzs': CONSONANTS_DZS,
     'consonants_tsch': CONSONANTS_TSCH,
     'consonants_both_rs': CONSONANTS_BOTH_RS,
-    'consonants_vowel_pkt': CONSONANTS_VOVEL_PKT,
+    'consonants_vowel_pkt': CONSONANTS_VOWEL_PKT,
 
 }
 
