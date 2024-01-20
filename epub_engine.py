@@ -1,6 +1,6 @@
 from ebooklib import epub
 from bs4 import BeautifulSoup
-from convert import ru_to_arm
+from app.utils.convert import ru_to_arm
 from data.letters import *
 
 

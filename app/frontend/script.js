@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const fileInput = document.getElementById('fileInput');
     const fileTextElement = document.getElementById('fileText');
 
+    // Разрешенные MIME-типы
+    const allowedMimeTypes = ['text/plain', 'application/epub+zip'];
+
     // Обновление текста с именем файла при изменении файла
     fileInput.addEventListener('change', function () {
         const file = fileInput.files[0];
@@ -15,15 +18,15 @@ document.addEventListener('DOMContentLoaded', function () {
         // Получение размера файла в КБ
         const fileSizeKB = file.size / 1024;
 
-        // Проверка типа файла (исключительно текстовый файл)
-        if (!fileType.startsWith('text/')) {
-            alert('Некорректный тип файла. Пожалуйста, выберите текстовый файл.');
+        // Проверка типа файла (разрешенные MIME-типы)
+        if (!allowedMimeTypes.includes(fileType)) {
+            showError('Недопустимый тип файла. Пожалуйста, выберите файл TXT или EPUB.');
             return;
         }
 
         // Проверка размера файла (не больше 500 КБ)
         if (fileSizeKB > 800) {
-            alert('Размер файла превышает 800 КБ. Пожалуйста, выберите файл размером до 500 КБ.');
+            alert('Размер файла превышает 800 КБ. Пожалуйста, выберите файл меньше размером.');
             return;
         }
 
@@ -37,22 +40,52 @@ async function processFile() {
     // Получение содержимого файла, если выбран
     const fileInput = document.getElementById('fileInput');
     const file = fileInput.files[0];
+    const options = Array.from(document.querySelectorAll('input[name="options"]:checked'))
+        .map(checkbox => checkbox.value);
 
 
-    // Обновление текста с именем файла
-    // fileInput.addEventListener('change', function () {
-    //     const file = fileInput.files[0];
-    //     fileTextElement.innerText = file ? `Selected File: ${file.name}` : '';
-    // });
 
     if (file) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            // Замена текста на содержимое файла
-            document.getElementById('textInput').value = e.target.result;
+        const fileType = file.type;
+
+        if (fileType === 'text/plain') {
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('options', JSON.stringify(options));
+
+            fetch('/api/process_file', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.blob())
+            .then(blob => {
+                // Создайте новый файл из полученного blob
+                const newFile = new File([blob], 'processed_file.txt', { type: 'text/plain' });
+
+                // Скачайте новый файл
+                const a = document.createElement('a');
+                const url = URL.createObjectURL(newFile);
+                a.href = url;
+                a.download = 'processed_file.txt';
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+            })
+            .catch(error => {
+                console.error('Error processing file:', error);
+            });
+
+        }
+        else {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                // Замена текста на содержимое файла
+                document.getElementById('textInput').value = e.target.result;
         };
         reader.readAsText(file);
-    }
+    }}
 }
 
 
