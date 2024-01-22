@@ -36,57 +36,94 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-async function processFile() {
+async function processAndDownload() {
     // Получение содержимого файла, если выбран
     const fileInput = document.getElementById('fileInput');
     const file = fileInput.files[0];
     const options = Array.from(document.querySelectorAll('input[name="options"]:checked'))
         .map(checkbox => checkbox.value);
 
-
-
     if (file) {
         const fileType = file.type;
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('options', JSON.stringify(options));
 
         if (fileType === 'text/plain') {
-            const formData = new FormData();
-            formData.append('file', file);
-            formData.append('options', JSON.stringify(options));
 
             fetch('/api/process_file', {
                 method: 'POST',
                 body: formData
             })
-            .then(response => response.blob())
-            .then(blob => {
-                // Создайте новый файл из полученного blob
-                const newFile = new File([blob], 'processed_file.txt', { type: 'text/plain' });
+                .then(response => response.blob())
+                .then(blob => {
+                    // Создайте новый файл из полученного blob
+                    const newFile = new File([blob], 'processed_file.txt', {type: 'text/plain'});
 
-                // Скачайте новый файл
-                const a = document.createElement('a');
-                const url = URL.createObjectURL(newFile);
-                a.href = url;
-                a.download = 'processed_file.txt';
-                document.body.appendChild(a);
-                a.click();
-                window.URL.revokeObjectURL(url);
-                document.body.removeChild(a);
+                    // Скачайте новый файл
+                    const a = document.createElement('a');
+                    const url = URL.createObjectURL(newFile);
+                    a.href = url;
+                    a.download = 'processed_file.txt';
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    document.body.removeChild(a);
+                })
+                .catch(error => {
+                    console.error('Error processing file:', error);
+                });
+        } else if (fileType === 'application/epub+zip') {
+
+            fetch('/api/process_file', {
+                method: 'POST',
+                body: formData
             })
-            .catch(error => {
-                console.error('Error processing file:', error);
-            });
+                .then(response => response.blob())
+                .then(blob => {
+                    // Создайте новый файл из полученного blob
+                    const newFile = new File([blob], 'processed_book.epub', {type: 'application/epub+zip'});
 
+                    // Скачайте новый файл
+                    const a = document.createElement('a');
+                    const url = URL.createObjectURL(newFile);
+                    a.href = url;
+                    a.download = 'processed_book.epub';
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    document.body.removeChild(a);
+                })
+                .catch(error => {
+                    console.error('Error processing file:', error);
+                });
         }
-        else {
-            const reader = new FileReader();
+    }
+}
 
+async function processFile() {
+    const fileInput = document.getElementById('fileInput');
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+
+    if (file) {
+        const fileType = file.type;
+
+        if (fileType === 'text/plain') {
             reader.onload = function (e) {
                 // Замена текста на содержимое файла
                 document.getElementById('textInput').value = e.target.result;
-        };
+            };
         reader.readAsText(file);
-    }}
+        }
+
+        else if (fileType === 'application/epub+zip') {
+            document.getElementById('textInput').value = 'Привет как дила?'
+        }
+    }
+
 }
+
 
 
 async function processText() {

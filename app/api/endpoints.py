@@ -6,6 +6,7 @@ from fastapi.responses import StreamingResponse
 import io
 from data.letters import *
 from app.utils.convert import ru_to_arm
+from epub_engine import get_ebook_from_memory, convert_epub, put_ebook_in_memory
 
 app = FastAPI()
 router = APIRouter()
@@ -18,7 +19,6 @@ async def read_root():
 
 @router.post("/process_text")
 async def process_text(data: dict):
-
     if "text" not in data or "options" not in data:
         raise HTTPException(status_code=422, detail="Missing 'text' or 'lesson_option' in data")
 
@@ -46,8 +46,9 @@ async def process_text(data: dict):
 async def process_file(file: UploadFile = File(...), options: str = Form(...)):
     # Считайте содержимое файла
     contents = await file.read()
-    logging.error(str(options))
+    # logging.error(str(options))
 
+    file_mime_type = file.content_type
     options_list = json.loads(options)
     valid_options = SETS.keys()
     invalid_options = set(options_list) - set(valid_options)
@@ -58,14 +59,22 @@ async def process_file(file: UploadFile = File(...), options: str = Form(...)):
     for _ in options_list:
         sets |= SETS[_]
 
-    # Выполните какие-то операции с содержимым файла
-    # В данном случае, просто обратим его содержимое
-    processed_contents = ru_to_arm(contents.decode('utf-8'), sets)
+    if file_mime_type.startswith('text'):
+        processed_contents = ru_to_arm(contents.decode('utf-8'), sets)
+        processed_file = io.BytesIO(processed_contents.encode('utf-8'))
+        return StreamingResponse(processed_file, media_type="text/plain",
+                                 headers={"Content-Disposition": "attachment; filename=processed_file.txt"})
 
-    # Создайте новый файл в памяти
-    processed_file = io.BytesIO(processed_contents.encode('utf-8'))
+    elif file_mime_type == "application/epub+zip":
+        book = await get_ebook_from_memory(contents)
+        processed_book = await put_ebook_in_memory(convert_epub(book, sets))
+        processed_file = io.BytesIO(processed_book)
+        return StreamingResponse(processed_file, media_type="text/plain",
+                                 headers={"Content-Disposition": "attachment; filename=processed_book.epub"})
 
-    # Верните новый файл в теле ответа
-    return StreamingResponse(processed_file, media_type="text/plain",
-                             headers={"Content-Disposition": "attachment; filename=processed_file.txt"})
+    else:
+        return {'error': 'unknown file type'}
+
+
+
 

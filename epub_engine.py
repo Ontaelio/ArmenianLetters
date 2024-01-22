@@ -1,7 +1,29 @@
+import os
+import aiofiles
 from ebooklib import epub
 from bs4 import BeautifulSoup
 from app.utils.convert import ru_to_arm
 from data.letters import *
+
+
+async def get_ebook_from_memory(zf: bytes) -> epub.EpubBook:
+    async with aiofiles.tempfile.NamedTemporaryFile(delete=False, dir='tmp') as tmp_file:
+        # async with aiofiles.open(tmp_file.name, mode='wb') as afp:
+        await tmp_file.write(zf)
+        await tmp_file.seek(0)
+        book = epub.read_epub(tmp_file.name)
+    os.remove(tmp_file.name)
+    return book
+
+
+async def put_ebook_in_memory(book: epub.EpubBook) -> bytes:
+    async with aiofiles.tempfile.NamedTemporaryFile(delete=False, dir='tmp') as tmp_file:
+        # async with aiofiles.open(tmp_file.name, mode='wb') as afp:
+        epub.write_epub(tmp_file.name, book)
+        await tmp_file.seek(0)
+        new_book = await tmp_file.read()
+    os.remove(tmp_file.name)
+    return new_book
 
 
 def get_template(chapter: epub.EpubHtml) -> str:
