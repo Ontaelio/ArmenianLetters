@@ -6,7 +6,7 @@ from fastapi.responses import StreamingResponse
 import io
 from data.letters import *
 from app.utils.convert import ru_to_arm
-from epub_engine import get_ebook_from_memory, convert_epub, put_ebook_in_memory
+from epub_engine import get_ebook_from_memory, convert_epub, put_ebook_in_memory, epub2txt
 
 app = FastAPI()
 router = APIRouter()
@@ -75,6 +75,17 @@ async def process_file(file: UploadFile = File(...), options: str = Form(...)):
     else:
         return {'error': 'unknown file type'}
 
+
+@router.post("/get_text_from_epub")
+async def process_file(file: UploadFile = File(...)):
+    contents = await file.read()
+    file_mime_type = file.content_type
+    if file_mime_type != "application/epub+zip":
+        return {'error': 'unknown file type'}
+
+    book = await get_ebook_from_memory(contents)
+    book_text = epub2txt(book)
+    return {'result': book_text}
 
 
 

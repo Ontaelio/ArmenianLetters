@@ -99,6 +99,8 @@ async function processAndDownload() {
                 });
         }
     }
+
+    else alert('Выберите файл')
 }
 
 async function processFile() {
@@ -118,9 +120,27 @@ async function processFile() {
         }
 
         else if (fileType === 'application/epub+zip') {
-            document.getElementById('textInput').value = 'Привет как дила?'
+            const formData = new FormData();
+            formData.append('file', file);
+
+            fetch('/api/get_text_from_epub', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                //console.log('Response from server:', data);
+                document.getElementById('textInput').value = data.result
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error uploading file');
+            });
+
         }
     }
+
+    else alert('Выберите файл')
 
 }
 
