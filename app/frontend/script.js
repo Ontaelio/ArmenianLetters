@@ -185,3 +185,19 @@ async function processText() {
     `);
     resultWindow.document.close();
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("click", function (event) {
+        const target = event.target;
+
+        // Проверяем, что клик произошел по названию топика
+        if (target.classList.contains("topic-title")) {
+            const topic = target.closest('.topic');
+
+            // Переключаем активность текущей темы
+            if (topic) {
+                topic.classList.toggle("active");
+            }
+        }
+    });
+});

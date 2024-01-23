@@ -10,26 +10,64 @@
 
 
 <header>
-                    <h1>Աрмянскիй конвертор текстов</h1>
+                    <h1>Аրմяնский коնвеրтоր текстов</h1>
                 </header>
 
 
 <body>
 
+
 <form id="processingForm">
 
 
     <div class="options-container">
-        <div class="column">
+<!--        <div class="column">-->
 
-            <label><b>Самоучитель</b></label>
+    <div class="dropdown">
+    <div class="dropdown-content">
+        <div class="topic">
+			<div class = "topic-title">
+            Самоучитель Сусанна Тиоян et al.
+			</div>
+			<div class="content">
+
+            <div class="column">
 
             <label>
                 <input type="checkbox" name="options" value="lesson_1"> Урок 1 - Աա ՈՒու Բբ Պպ Գգ Կկ Դդ Տտ Րր Լլ Մմ Նն
             </label>
             <label>
+                &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="options" value="lesson_1a"> Только Աա ՈՒու
+            </label>
+            <label>
+                &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="options" value="lesson_1b"> Только Բբ Գգ Դդ
+            </label>
+            <label>
+                &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="options" value="lesson_1c"> Только Պպ Կկ Տտ
+            </label>
+            <label>
+                &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="options" value="lesson_1d"> Только Րր Լլ Մմ Նն
+            </label>
+
+            <label>
                 <input type="checkbox" name="options" value="lesson_2"> Урок 2 - Իի Յյ Խխ Շշ Ժժ Չչ Սս Զզ Ցց Ֆֆ Վվ
             </label>
+            <label>
+                &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="options" value="lesson_2a"> Только Իի Յյ
+            </label>
+            <label>
+                &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="options" value="lesson_2b"> Только Խխ Շշ Չչ Ցց
+            </label>
+            <label>
+                &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="options" value="lesson_2c"> Только Ժժ Սս Զզ
+            </label>
+            <label>
+                &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="options" value="lesson_2d"> Только Ֆֆ Վվ
+            </label>
+
+        </div>
+        <div class="column">
+
             <label>
                 <input type="checkbox" name="options" value="lesson_3"> Урок 3 - Եե Էէ
             </label>
@@ -40,7 +78,7 @@
                 <input type="checkbox" name="options" value="lesson_5"> Урок 5 - Հհ Ղղ Ռռ
             </label>
             <label>
-                <input type="checkbox" name="options" value="lesson_6"> Урок 6 - Ըը
+                <input type="checkbox" name="options" value="lesson_6"> Урок 6 - Ըը (Ы)
             </label>
 
 <!--            </div>-->
@@ -56,16 +94,22 @@
                 <input type="checkbox" name="options" value="lesson_9"> Урок 9 - Թթ
             </label>
             <label>
-                <input type="checkbox" name="options" value="lesson_10"> Урок 10 - Ձձ Ծծ
+                <input type="checkbox" name="options" value="lesson_10"> Урок 10 - Ձձ Ծծ (ДЗ, ТЬ)
             </label>
             <label>
-                <input type="checkbox" name="options" value="lesson_11"> Урок 11 - Ջջ Ճճ
+                <input type="checkbox" name="options" value="lesson_11"> Урок 11 - Ջջ Ճճ (ДЖ, Щ)
             </label>
-
-
         </div>
-        <div class="column">
-            <label><b>Наборы букв</b></label>
+        </div>
+        </div>
+
+        <div class="topic">
+			<div class = "topic-title">
+            Наборы букв
+			</div>
+			<div class="content">
+
+            <div class="column">
             <label>
                 <input type="checkbox" name="options" value="vowels"> Гласные - Աա ՈՒու Իի Էէ Եե Օօ Ոո
             </label>
@@ -79,7 +123,8 @@
                 <input type="checkbox" name="options" value="vowels_bI"> Ы -> Ըը
             </label>
 
-            <br>
+            </div>
+            <div class="column">
 
             <label>
                 <input type="checkbox" name="options" value="consonants"> Согласные - Բբ Պպ Գգ Կկ Դդ Տտ Րր Լլ Մմ Նն Յյ Խխ Շշ Ժժ Չչ Սս Զզ Ցց Ֆֆ Վվ
@@ -100,8 +145,9 @@
                 <input type="checkbox" name="options" value="consonants_altpkt"> П, К, Т с придыханием (Փփ Քք Թթ)
             </label>
             <label>
-                <input type="checkbox" name="options" value="consonants_vowel_pkt"> пока только Т
+                <input type="checkbox" name="options" value="consonants_vowel_pkt"> Պպ Կկ Տտ перед гласными, иначе Փփ Քք Թթ
             </label>
+
             <label>
                 <input type="checkbox" name="options" value="consonants_softt"> Ծծ для мягкой Т
             </label>
@@ -114,6 +160,11 @@
 
         </div>
     </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
 
     <!--    <label for="fileInput">Загрузить файл:</label>-->
 
