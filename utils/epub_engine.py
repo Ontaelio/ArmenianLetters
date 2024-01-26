@@ -2,7 +2,7 @@ import os
 import aiofiles
 from ebooklib import epub
 from bs4 import BeautifulSoup
-from app.utils.convert import ru_to_arm
+from utils.convert import ru_to_arm
 from data.letters import *
 
 

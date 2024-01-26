@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.api.endpoints import router as api_router
+
 app = FastAPI()
 
 app.add_middleware(
@@ -17,12 +19,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 # Статические файлы (фронтенд)
 app.mount("/front", StaticFiles(directory="app/frontend", html=True), name="frontend")
 
-
-# Подключение файлов обработки API-запросов
-from app.api.endpoints import router as api_router
-
 app.include_router(api_router, prefix="/api", tags=["api"])
-
 
 if __name__ == "__main__":
     import uvicorn
