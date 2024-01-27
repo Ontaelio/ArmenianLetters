@@ -4,44 +4,33 @@ document.addEventListener('DOMContentLoaded', function () {
     // В этом блоке кода обрабатывается событие загрузки страницы
     const fileInput = document.getElementById('fileInput');
     const fileTextElement = document.getElementById('fileText');
-
-    // Разрешенные MIME-типы
     const allowedMimeTypes = ['text/plain', 'application/epub+zip'];
 
-    // Обновление текста с именем файла при изменении файла
     fileInput.addEventListener('change', function () {
         const file = fileInput.files[0];
-
-        // Получение типа файла
         const fileType = file.type;
-
-        // Получение размера файла в КБ
         const fileSizeKB = file.size / 1024;
-
-        // Проверка типа файла (разрешенные MIME-типы)
         if (!allowedMimeTypes.includes(fileType)) {
             showError('Недопустимый тип файла. Пожалуйста, выберите файл TXT или EPUB.');
             return;
         }
 
-        // Проверка размера файла (не больше 500 КБ)
         if (fileSizeKB > 800) {
             alert('Размер файла превышает 800 КБ. Пожалуйста, выберите файл меньше размером.');
             return;
         }
 
         fileTextElement.innerText = file ? `Выбран файл: ${file.name}` : '';
-        // document.getElementById('optionsForm').submit();
     });
 });
 
 
 async function processAndDownload() {
-    // Получение содержимого файла, если выбран
     const fileInput = document.getElementById('fileInput');
     const file = fileInput.files[0];
     const options = Array.from(document.querySelectorAll('input[name="options"]:checked'))
         .map(checkbox => checkbox.value);
+    const allowedMimeTypes = ['text/plain', 'application/epub+zip'];
 
     if (file) {
         const fileType = file.type;
@@ -51,7 +40,7 @@ async function processAndDownload() {
         formData.append('file', file);
         formData.append('options', JSON.stringify(options));
 
-        if (fileType === 'text/plain') {
+        if (allowedMimeTypes.includes(fileType)) {
 
             fetch('/api/process_file', {
                 method: 'POST',
@@ -59,10 +48,8 @@ async function processAndDownload() {
             })
                 .then(response => response.blob())
                 .then(blob => {
-                    // Создайте новый файл из полученного blob
-                    const newFile = new File([blob], modifiedFileName, {type: 'text/plain'});
+                    const newFile = new File([blob], modifiedFileName, {type: fileType});
 
-                    // Скачайте новый файл
                     const a = document.createElement('a');
                     const url = URL.createObjectURL(newFile);
                     a.href = url;
@@ -75,31 +62,8 @@ async function processAndDownload() {
                 .catch(error => {
                     console.error('Error processing file:', error);
                 });
-        } else if (fileType === 'application/epub+zip') {
+        } else alert('Что-то пошло не так с типом файла')
 
-            fetch('/api/process_file', {
-                method: 'POST',
-                body: formData
-            })
-                .then(response => response.blob())
-                .then(blob => {
-                    // Создайте новый файл из полученного blob
-                    const newFile = new File([blob], modifiedFileName, {type: 'application/epub+zip'});
-
-                    // Скачайте новый файл
-                    const a = document.createElement('a');
-                    const url = URL.createObjectURL(newFile);
-                    a.href = url;
-                    a.download = modifiedFileName;
-                    document.body.appendChild(a);
-                    a.click();
-                    window.URL.revokeObjectURL(url);
-                    document.body.removeChild(a);
-                })
-                .catch(error => {
-                    console.error('Error processing file:', error);
-                });
-        }
     }
 
     else alert('Выберите файл')
@@ -166,9 +130,6 @@ async function processText() {
 
     const result = await response.json();
 
-    // document.getElementById("result").innerText = `${result.result}`;
-
-    // Открытие нового окна и вставка результата
     const resultWindow = window.open('', '_blank');
     resultWindow.document.write(`
         <html>
@@ -192,11 +153,9 @@ document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener("click", function (event) {
         const target = event.target;
 
-        // Проверяем, что клик произошел по названию топика
         if (target.classList.contains("topic-title")) {
             const topic = target.closest('.topic');
 
-            // Переключаем активность текущей темы
             if (topic) {
                 topic.classList.toggle("active");
             }
