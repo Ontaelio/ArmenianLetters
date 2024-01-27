@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from data.letters import *
 
@@ -15,10 +15,21 @@ SETS = {
     'lesson_10': LESSON_10,
     'lesson_11': LESSON_11,
     'vowels': VOWELS,
+    'vowels_auye': VOWELS_AUYE,
+    'vowels_ieo': VOWELS_IEO,
     'vowels_j': VOWELS_ADD_J,
     'vowels_vojev': VOWELS_ADD_VOEV,
     'vowels_bI': VOWELS_ADD_,
     'consonants': CONSONANTS,
+    'consonants_bp': CONSONANTS_BP,
+    'consonants_gk': CONSONANTS_GK,
+    'consonants_dt': CONSONANTS_DT,
+    'consonants_jrh': CONSONANTS_JRH,
+    'consonants_lmn': CONSONANTS_LMN,
+    'consonants_vzh': CONSONANTS_VZH,
+    'consonants_zch': CONSONANTS_ZCH,
+    'consonants_fsh': CONSONANTS_FSH,
+    'consonants_sc': CONSONANTS_SC,
     'consonants_altr': CONSONANTS_ALTR,
     'consonants_altg': CONSONANTS_ALTG,
     'consonants_alth': CONSONANTS_ALTH,
@@ -46,6 +57,14 @@ class LettersSet:
     front_name: str
     title: str
     offset: bool = False
+
+
+@dataclass
+class SetResponse:
+    name: str
+    front_name: str
+    title: str
+    offset: bool
 
 
 # this function can be used to provide values for LettersSet.title
@@ -199,6 +218,20 @@ SETS_SELECTION = {
                 title="Аа Աա | Уу ՈՒու | Ии Իի | Ээ Էէ | Ее Եե | О... Օօ | Оо Ոո"
             ),
             LettersSet(
+                name="Ա, ՈՒ, Ե",
+                contents=VOWELS_AUYE,
+                front_name='vowels_auye',
+                title="Аа Աա | Уу ՈՒու | Ее Եե",
+                offset=True
+            ),
+            LettersSet(
+                name="Ի, Է, Ո, Օ",
+                contents=VOWELS_IEO,
+                front_name='vowels_ieo',
+                title="Ии Իի | Ээ Էէ | О... Օօ | Оо Ոո",
+                offset=True
+            ),
+            LettersSet(
                 name="Я, Ё, Ю с Յ",
                 contents=VOWELS_ADD_J,
                 front_name='vowels_j',
@@ -223,6 +256,69 @@ SETS_SELECTION = {
                 contents=CONSONANTS,
                 front_name='consonants',
                 title="Бб Բբ | Пп Պպ | Гг Գգ | Кк Կկ | Дд Դդ | Тт Տտ | Рр Րր | Лл Լլ | Мм Մմ | Нн Նն | Йй Յյ | Хх Խխ | Шш Շշ | Жж Ժժ | Чч Չչ | Сс Սս | Зз Զզ | Цц Ցց | Фф Ֆֆ | Вв Վվ"
+            ),
+            LettersSet(
+                name="Բ, Պ",
+                contents=CONSONANTS_BP,
+                front_name='consonants_bp',
+                title="Бб Բբ | Пп Պպ",
+                offset=True
+            ),
+            LettersSet(
+                name="Գ, Կ",
+                contents=CONSONANTS_GK,
+                front_name='consonants_gk',
+                title="Гг Գգ | Кк Կկ",
+                offset=True
+            ),
+            LettersSet(
+                name="Դ, Տ",
+                contents=CONSONANTS_DT,
+                front_name='consonants_dt',
+                title="Дд Դդ | Тт Տտ",
+                offset=True
+            ),
+            LettersSet(
+                name="Յ, Ր, Խ",
+                contents=CONSONANTS_JRH,
+                front_name='consonants_jrh',
+                title="Йй Յյ | Рр Րր | Хх Խխ",
+                offset=True
+            ),
+            LettersSet(
+                name="Լ, Մ, Ն",
+                contents=CONSONANTS_LMN,
+                front_name='consonants_lmn',
+                title="Лл Լլ | Мм Մմ | Нн Նն",
+                offset=True
+            ),
+            LettersSet(
+                name="Վ, Ժ",
+                contents=CONSONANTS_VZH,
+                front_name='consonants_vzh',
+                title="Вв Վվ | Жж Ժժ",
+                offset=True
+            ),
+            LettersSet(
+                name="Ֆ, Շ",
+                contents=CONSONANTS_FSH,
+                front_name='consonants_fsh',
+                title="Фф Ֆֆ | Шш Շշ",
+                offset=True
+            ),
+            LettersSet(
+                name="Զ, Չ",
+                contents=CONSONANTS_ZCH,
+                front_name='consonants_zch',
+                title="Зз Զզ | Чч Չչ",
+                offset=True
+            ),
+            LettersSet(
+                name="Ս, Ց",
+                contents=CONSONANTS_SC,
+                front_name='consonants_sc',
+                title="Сс Սս | Цц Ցց",
+                offset=True
             ),
         ],
         3: [
