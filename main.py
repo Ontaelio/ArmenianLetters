@@ -4,7 +4,11 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.endpoints import router as api_router
 
-app = FastAPI()
+app = FastAPI(
+    title="Letters converter Ru -> Arm",
+    description="A tool to convert certain letters in a Russian text or epub into Armenian ones. "
+                "For great justice!"
+)
 
 app.add_middleware(
     CORSMiddleware,

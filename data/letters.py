@@ -420,42 +420,6 @@ ARMENIAN_ALPHABET = {
 }
 
 
-SETS = {
-    'lesson_1': LESSON_1,
-    'lesson_2': LESSON_2,
-    'lesson_3': LESSON_3,
-    'lesson_4': LESSON_4,
-    'lesson_5': LESSON_5,
-    'lesson_6': LESSON_6,
-    'lesson_7': LESSON_7,
-    'lesson_8': LESSON_8,
-    'lesson_9': LESSON_9,
-    'lesson_10': LESSON_10,
-    'lesson_11': LESSON_11,
-    'vowels': VOWELS,
-    'vowels_j': VOWELS_ADD_J,
-    'vowels_vojev': VOWELS_ADD_VOEV,
-    'vowels_bI': VOWELS_ADD_,
-    'consonants': CONSONANTS,
-    'consonants_altr': CONSONANTS_ALTR,
-    'consonants_altg': CONSONANTS_ALTG,
-    'consonants_alth': CONSONANTS_ALTH,
-    'consonants_altpkt': CONSONANTS_ALTPKT,
-    'consonants_softt': CONSONANTS_SOFTT,
-    'consonants_dzs': CONSONANTS_DZS,
-    'consonants_tsch': CONSONANTS_TSCH,
-    'consonants_both_rs': CONSONANTS_BOTH_RS,
-    'consonants_vowel_pkt': CONSONANTS_VOWEL_PKT,
-    'lesson_1a': LESSON_1A,
-    'lesson_1b': LESSON_1B,
-    'lesson_1c': LESSON_1C,
-    'lesson_1d': LESSON_1D,
-    'lesson_2a': LESSON_2A,
-    'lesson_2b': LESSON_2B,
-    'lesson_2c': LESSON_2C,
-    'lesson_2d': LESSON_2D,
-}
-
 if __name__ == '__main__':
     a = []
     for key, value in CONSONANTS.items():

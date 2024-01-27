@@ -1,11 +1,12 @@
 import json
-
+import io
 from fastapi import FastAPI, APIRouter, HTTPException, UploadFile, Form, File
 from fastapi.responses import StreamingResponse
-import io
-from data.letters import *
+
+from data.sets import SETS
 from utils.convert import ru_to_arm
 from utils.epub_engine import get_ebook_from_memory, convert_epub, put_ebook_in_memory, epub2txt
+from utils.get_sets import get_sets
 
 app = FastAPI()
 router = APIRouter()
@@ -14,6 +15,11 @@ router = APIRouter()
 @router.get("/")
 async def read_root():
     return {"message": "Hello, World!"}
+
+
+@router.get("/sets")
+async def read_sets():
+    return get_sets()
 
 
 @router.post("/process_text")
