@@ -46,6 +46,8 @@ async function processAndDownload() {
     if (file) {
         const fileType = file.type;
         const formData = new FormData();
+        const fileName = file.name;
+        const modifiedFileName = fileName.replace(/(\.[\w\d]+)$/, "-ARM$1");
         formData.append('file', file);
         formData.append('options', JSON.stringify(options));
 
@@ -58,13 +60,13 @@ async function processAndDownload() {
                 .then(response => response.blob())
                 .then(blob => {
                     // Создайте новый файл из полученного blob
-                    const newFile = new File([blob], 'processed_file.txt', {type: 'text/plain'});
+                    const newFile = new File([blob], modifiedFileName, {type: 'text/plain'});
 
                     // Скачайте новый файл
                     const a = document.createElement('a');
                     const url = URL.createObjectURL(newFile);
                     a.href = url;
-                    a.download = 'processed_file.txt';
+                    a.download = modifiedFileName;
                     document.body.appendChild(a);
                     a.click();
                     window.URL.revokeObjectURL(url);
@@ -82,13 +84,13 @@ async function processAndDownload() {
                 .then(response => response.blob())
                 .then(blob => {
                     // Создайте новый файл из полученного blob
-                    const newFile = new File([blob], 'processed_book.epub', {type: 'application/epub+zip'});
+                    const newFile = new File([blob], modifiedFileName, {type: 'application/epub+zip'});
 
                     // Скачайте новый файл
                     const a = document.createElement('a');
                     const url = URL.createObjectURL(newFile);
                     a.href = url;
-                    a.download = 'processed_book.epub';
+                    a.download = modifiedFileName;
                     document.body.appendChild(a);
                     a.click();
                     window.URL.revokeObjectURL(url);
@@ -201,3 +203,19 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+function updateButtonsVisibility() {
+    const fileInput = document.getElementById("fileInput");
+    const uploadButton = document.getElementById("uploadButton");
+    const downloadButton = document.getElementById("downloadButton");
+
+    if (fileInput.files.length > 0) {
+        // Файл выбран, показываем кнопки
+        uploadButton.style.display = "inline-block";
+        downloadButton.style.display = "inline-block";
+    } else {
+        // Файл не выбран, скрываем кнопки
+        uploadButton.style.display = "none";
+        downloadButton.style.display = "none";
+    }
+}

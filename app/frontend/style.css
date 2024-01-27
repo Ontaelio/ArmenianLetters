@@ -81,7 +81,10 @@ button {
     display: inline-block;
     font-size: 16px;
     font-weight: bold;
+}
 
+button:hover {
+    background-color: #111; /* Цвет фона кнопки */
 }
 
 #result {
@@ -107,10 +110,13 @@ label.custom-file-upload {
     border-radius: 5px;
     font-size: 14px;
     width: 70px;
-    margin-top: 10px; /* Добавим немного отступа сверху */
+    margin-top: 10px;
     display: inline-block;
 }
 
+label.custom-file-upload:hover {
+   background-color: #111; /* Цвет фона кнопки */
+}
 /* Стили для кнопки после выбора файла */
 label.custom-file-upload::after {
     content: 'Выбрать файл'; /* Подпись кнопки */
@@ -133,6 +139,8 @@ label.custom-file-upload::after {
 label:hover {
 	background-color: #DDDDDD;
 }
+
+
 .dropdown {
     position: relative;
     display: inline-block;

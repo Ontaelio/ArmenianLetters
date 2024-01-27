@@ -33,15 +33,14 @@
     </div>
 
 
-    <!--    <label for="fileInput">Загрузить файл:</label>-->
-
-    <!-- Обновленная кнопка загрузки файла -->
     <label class="custom-file-upload">
-        <input type="file" id="fileInput" name="fileInput" accept=".txt, .epub">
+        <input type="file" id="fileInput" name="fileInput" accept=".txt, .epub" onchange="updateButtonsVisibility()">
     </label>
     <div class="custom-file-upload-text" id="fileText"></div>
-    <button type="button" onclick="processFile()">Загрузить</button>
-    <button type="button" onclick="processAndDownload()">Скачать</button>
+    <div style="display: flex; gap: 10px;">
+        <button type="button" id="uploadButton" style="display: none;" onclick="processFile()">Загрузить текст</button>
+        <button type="button" id="downloadButton" style="display: none;" onclick="processAndDownload()">Конвертировать и скачать</button>
+    </div>
 
     <label for="textInput">Текст:</label>
     <textarea id="textInput" name="text" rows="20" cols="150"></textarea>
