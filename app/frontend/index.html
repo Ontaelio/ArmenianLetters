@@ -1,16 +1,56 @@
-<!-- frontend/index.html -->
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/style.css">
-    <title>FastAPI Frontend</title>
+    <title>Конвертор текстов Арм</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
+
+<header>
+                    <h1>Аրմяնский коնвеրтоր текстов</h1>
+                </header>
+
+
 <body>
-    <h1>Hello FastAPI Frontend!</h1>
-    <button id="getDataButton">Get Data from API</button>
-    <div id="dataContainer"></div>
-    <script src="/static/script.js"></script>
+
+
+<form id="processingForm">
+
+
+    <div class="options-container">
+<!--        <div class="column">-->
+
+    <div class="dropdown">
+    <div class="dropdown-content">
+        <div id="topicsContainer"></div>
+
+        <script src="sets_menu.js"></script>
+    </div>
+    </div>
+    </div>
+
+
+    <label class="custom-file-upload">
+        <input type="file" id="fileInput" name="fileInput" accept=".txt, .epub" onchange="updateButtonsVisibility()">
+    </label>
+    <div class="custom-file-upload-text" id="fileText"></div>
+    <div style="display: flex; gap: 10px;">
+        <button type="button" id="uploadButton" style="display: none;" onclick="processFile()">Загрузить текст</button>
+        <button type="button" id="downloadButton" style="display: none;" onclick="processAndDownload()">Конвертировать и скачать</button>
+    </div>
+
+    <label for="textInput">Текст:</label>
+    <textarea id="textInput" name="text" rows="20" cols="150"></textarea>
+
+    <button type="button" onclick="processText()">Конвертировать</button>
+
+    <div id="result"></div>
+
+    <script src="script.js"></script>
+</form>
+
 </body>
 </html>
