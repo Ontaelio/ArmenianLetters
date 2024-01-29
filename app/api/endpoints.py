@@ -1,12 +1,14 @@
 import json
 import io
+from typing import List
+
 from fastapi import FastAPI, APIRouter, HTTPException, UploadFile, Form, File
 from fastapi.responses import StreamingResponse
 
-from data.sets import SETS
+from data.sets import SETS, SetResponse, BookResponse
 from utils.convert import ru_to_arm
 from utils.epub_engine import get_ebook_from_memory, convert_epub, put_ebook_in_memory, epub2txt
-from utils.get_sets import get_sets
+from utils.get_sets import get_set_by_id, get_sets_for_frontend, get_sets_list, get_sets_full
 
 app = FastAPI()
 router = APIRouter()
@@ -19,7 +21,22 @@ async def read_root():
 
 @router.get("/sets")
 async def read_sets():
-    return get_sets()
+    return get_sets_list()
+
+
+@router.get("/sets_full", response_model=List[BookResponse])
+async def read_sets_full():
+    return get_sets_full()
+
+
+@router.get("/sets_front")
+async def read_sets_front():
+    return get_sets_for_frontend()
+
+
+@router.get("/set/{set_id}", response_model=List[SetResponse])
+async def read_one_set(set_id: int):
+    return get_set_by_id(set_id)
 
 
 @router.post("/process_text")
