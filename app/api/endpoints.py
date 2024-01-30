@@ -42,12 +42,11 @@ async def read_one_set(set_id: int):
 @router.post("/process_text")
 async def process_text(data: dict):
     if "text" not in data or "options" not in data:
-        raise HTTPException(status_code=422, detail="Missing 'text' or 'lesson_option' in data")
+        raise HTTPException(status_code=422, detail="Missing 'text' or 'options' in data")
 
     text = data.get("text")
     lesson_options = data.get("options")
 
-    # Проверяем, что lesson_options содержит только допустимые значения
     valid_options = SETS.keys()
     invalid_options = set(lesson_options) - set(valid_options)
     if invalid_options:
@@ -66,7 +65,6 @@ async def process_text(data: dict):
 
 @router.post("/process_file")
 async def process_file(file: UploadFile = File(...), options: str = Form(...)):
-    # Считайте содержимое файла
     contents = await file.read()
     # logging.error(str(options))
 
