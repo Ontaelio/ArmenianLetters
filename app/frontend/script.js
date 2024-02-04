@@ -10,13 +10,17 @@ document.addEventListener('DOMContentLoaded', function () {
         const file = fileInput.files[0];
         const fileType = file.type;
         const fileSizeKB = file.size / 1024;
+        const sizeByType = {
+            'text/plain': 810,
+            'application/epub+zip': 2100
+        }
         if (!allowedMimeTypes.includes(fileType)) {
             showError('Недопустимый тип файла. Пожалуйста, выберите файл TXT или EPUB.');
             return;
         }
 
-        if (fileSizeKB > 800) {
-            alert('Размер файла превышает 800 КБ. Пожалуйста, выберите файл меньше размером.');
+        if (fileSizeKB > sizeByType[fileType]) {
+            alert('Размер файла превышает 800 КБ (txt) / 2 МБ (epub). Пожалуйста, выберите файл меньше размером.');
             return;
         }
 
@@ -42,6 +46,9 @@ async function processAndDownload() {
 
         if (allowedMimeTypes.includes(fileType)) {
 
+            const processingMessage = document.getElementById('processingMessage');
+            processingMessage.style.display = 'block';
+
             fetch('/api/process_file', {
                 method: 'POST',
                 body: formData
@@ -58,15 +65,18 @@ async function processAndDownload() {
                     a.click();
                     window.URL.revokeObjectURL(url);
                     document.body.removeChild(a);
+
                 })
+                .then(() => {
+                processingMessage.style.display = 'none';})
                 .catch(error => {
                     console.error('Error processing file:', error);
-                });
-        } else alert('Что-то пошло не так с типом файла')
+                    alert('Ошибка обработки файла')})
 
+        } else alert('Что-то пошло не так с типом файла')
     }
 
-    else alert('Выберите файл')
+    else alert('Выберите файл');
 }
 
 async function processFile() {

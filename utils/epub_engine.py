@@ -93,7 +93,7 @@ def epub2txt(book: epub.EpubBook) -> str:
     for _ in book_items:
         if type(_) == epub.EpubHtml:
             soup = BeautifulSoup(_.get_body_content(), 'html.parser')
-            text = [' '.join(para.get_text().split()) for para in soup.find_all('p')]
+            text = [' '.join(para.get_text().split()) for para in soup.find_all({'p', 'h1', 'h2', 'h3', 'h4'})]
             text_items.append('\n'.join(text))
 
     return '\n\n'.join(text_items)
