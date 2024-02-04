@@ -130,7 +130,7 @@ async function processText() {
 
     const data = { text, options };
 
-    const response = await fetch('http://localhost:8000/api/process_text', {
+    const response = await fetch('/api/process_text', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

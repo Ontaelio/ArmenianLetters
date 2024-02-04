@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const topicsContainer = document.getElementById("topicsContainer");
 
     try {
-        const response = await fetch('http://localhost:8000/api/sets_front');
+        const response = await fetch('/api/sets_front');
         const setsData = await response.json();
 
         // Создаем элементы для каждой темы
