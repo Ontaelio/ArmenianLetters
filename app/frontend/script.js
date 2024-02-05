@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
             'application/epub+zip': 2100
         }
         if (!allowedMimeTypes.includes(fileType)) {
-            showError('Недопустимый тип файла. Пожалуйста, выберите файл TXT или EPUB.');
+            alert('Недопустимый тип файла. Пожалуйста, выберите файл TXT или EPUB.');
             return;
         }
 
@@ -177,8 +177,9 @@ function updateButtonsVisibility() {
     const fileInput = document.getElementById("fileInput");
     const uploadButton = document.getElementById("uploadButton");
     const downloadButton = document.getElementById("downloadButton");
+    // const alredy_selected = document.getElementById('fileText').innerText;
 
-    if (fileInput.files.length > 0) {
+    if (fileInput.files.length > 0){
         // Файл выбран, показываем кнопки
         uploadButton.style.display = "inline-block";
         downloadButton.style.display = "inline-block";
