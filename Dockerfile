@@ -13,8 +13,8 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-#run apt update
-#run apt install -y procps
+#RUN apt update
+#RUN apt install -y procps curl
 
 CMD ["gunicorn", "-k", "uvicorn.workers.UvicornWorker", "-b 0.0.0.0", "main:app"]
 # gunicorn -k uvicorn.workers.UvicornWorker -b 0.0.0.0 main:app
